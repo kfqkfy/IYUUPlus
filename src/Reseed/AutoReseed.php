@@ -829,7 +829,7 @@ class AutoReseed
         if ($reseed_check && is_array($reseed_check)) {
             // 循环检查所有项目
             foreach ($reseed_check as $item) {
-                echo "clients_" . $k . "【" . self::$links[$k]['_config']['name'] . "】正在循环检查所有项目... {$siteName}" . PHP_EOL;
+                // echo "clients_" . $k . "【" . self::$links[$k]['_config']['name'] . "】正在循环检查所有项目... {$siteName}" . PHP_EOL;
                 $item = ($item === 'uid' ? 'id' : $item);   // 兼容性处理【用户的user_id在配置项内是id】
                 if (empty(self::$_sites[$siteName]) || empty(self::$_sites[$siteName][$item])) {
                     $msg = '-------因当前' . $siteName . "站点未设置" . $item . "，已跳过！！【如果确实已设置，请检查辅种任务，是否勾选{$siteName}站点】" . PHP_EOL . PHP_EOL;
