@@ -841,7 +841,7 @@ class AutoReseed
         }
         // 重复做种检测
         if (isset($infohash_Dir[$info_hash])) {
-            echo '-------与客户端现有种子重复：' . $_url . PHP_EOL . PHP_EOL;
+            // echo '-------与客户端现有种子重复：' . $_url . PHP_EOL . PHP_EOL;
             self::$notifyMsg['reseedRepeat']++;
             return false;
         }
