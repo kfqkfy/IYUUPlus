@@ -440,8 +440,8 @@ class AutoReseed
             //static::wLog($hashArray, 'Request_' . $clientKey);
 
             self::$notifyMsg['hashCount'] += count($hashString);
-            // 分组200个hash，分批辅种
-            $group_num = 200;
+            // 分组400个hash，分批辅种
+            $group_num = 400;
             if (count($hashString) > $group_num) {
                 $hashJson = $hashArray['hash'];
                 $infoHash = json_decode($hashJson, true);
