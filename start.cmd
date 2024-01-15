@@ -8,7 +8,7 @@ echo Github: https://github.com/ledccn/IYUUPlus
 echo QQ: 859882209 / 931954050 / 924099912
 echo Token: https://iyuu.cn
 echo Blog: https://www.iyuu.cn
-echo Docs: http://api.iyuu.cn/docs.php
+echo Docs: http://iyuuapi.19900204.xyz/docs.php
 echo.
 goto :checkPHP
 

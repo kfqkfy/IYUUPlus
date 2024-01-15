@@ -28,8 +28,8 @@ class Users
 
     /**
      * 用户绑定
-     * @descr 接口地址 https://api.iyuu.cn/index.php?s=App.User.Login
-     *        接口文档 https://api.iyuu.cn/docs.php?service=App.User.Login&detail=1&type=fold
+     * @descr 接口地址 https://iyuuapi.19900204.xyz/index.php?s=App.User.Login
+     *        接口文档 https://iyuuapi.19900204.xyz/docs.php?service=App.User.Login&detail=1&type=fold
      * @param string $token
      * @param Request $request
      * @return array
@@ -72,9 +72,9 @@ class Users
 
     /**
      * 检查token及绑定状态
-     * - 接口api.iyuu.cn返回的信息，原样返回给前端
-     * @descr 接口地址 https://api.iyuu.cn/index.php?s=App.Api.Sites
-     *        接口文档 https://api.iyuu.cn/docs.php?service=App.Api.Sites&detail=1&type=fold
+     * - 接口iyuuapi.19900204.xyz返回的信息，原样返回给前端
+     * @descr 接口地址 https://iyuuapi.19900204.xyz/index.php?s=App.Api.Sites
+     *        接口文档 https://iyuuapi.19900204.xyz/docs.php?service=App.Api.Sites&detail=1&type=fold
      * @param string $token
      * @param Request $request
      * @return array
@@ -103,7 +103,7 @@ class Users
             $session->set(Constant::Session_Token_Key, $token);
         } else {
             /**
-             * 接口api.iyuu.cn在用户的token未激活时，会返回403状态码 和 推荐站点列表，供用户填写绑定信息
+             * 接口iyuuapi.19900204.xyz在用户的token未激活时，会返回403状态码 和 推荐站点列表，供用户填写绑定信息
              */
             if (isset($rs['ret']) && ($rs['ret'] === 403) && isset($rs['data']['recommend']) && is_array($rs['data']['recommend'])) {
                 //用户未绑定合作站点

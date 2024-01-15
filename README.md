@@ -75,5 +75,5 @@ Windows安装：https://www.iyuu.cn/archives/429/
 
 # 接口开发文档
 
-实时更新的接口文档：http://api.iyuu.cn/docs.php
+实时更新的接口文档：http://iyuuapi.19900204.xyz/docs.php
 如果您懂得其他语言的开发，可以基于接口做成任何您喜欢的样子，比如手机APP，二进制包，Windows的GUI程序，浏览器插件等。欢迎分享您的作品！
