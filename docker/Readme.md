@@ -128,7 +128,7 @@ IYUU自动辅种工具（英文名：IYUUAutoReseed），是一款PHP语言编�
 
 如果您懂得其他语言的开发，可以基于接口做成任何您喜欢的样子，比如手机APP，二进制包，Windows的GUI程序，浏览器插件等。欢迎分享您的作品！
 
-实时更新的接口文档：http://api.iyuu.cn/docs.php
+实时更新的接口文档：http://iyuuapi.19900204.xyz/docs.php
 
 
 #### 需求提交/错误反馈

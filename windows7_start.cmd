@@ -8,30 +8,30 @@ echo Github: https://github.com/ledccn/IYUUPlus
 echo QQ: 859882209 / 931954050 / 924099912
 echo Token: https://iyuu.cn
 echo Blog: https://www.iyuu.cn
-echo Docs: http://api.iyuu.cn/docs.php
+echo Docs: http://iyuuapi.19900204.xyz/docs.php
 echo.
-echo "ÕýÔÚ¼ì²âÔ´Âë¿âµÄgitÌØÕ÷ÎÄ¼þ..."
+echo "ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ô´ï¿½ï¿½ï¿½ï¿½gitï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½..."
 if exist "%~dp0.git\config" (
-    echo "ÕýÔÚÎªÄú×Ô¶¯¸üÐÂ..."
+    echo "ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½..."
     git fetch --all
     git reset --hard origin/master
-    echo "¸üÐÂÍê³É£¡"
+    echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½"
 ) else (
-    echo "µ±Ç°IYUUPlusÔ´Âë£¬²¢·ÇÍ¨¹ýgitÀ­È¡£¬²»Ö§³Ö×Ô¶¯¸üÐÂ"
+    echo "ï¿½ï¿½Ç°IYUUPlusÔ´ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½gitï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½"
 )
 echo.
 goto :checkPHP
 
 :checkPHP
 if exist "%~dp0php\php.exe" (set PHP_BINARY=%~dp0php\php.exe) else (set PHP_BINARY=php.exe)
-echo "PHP¶þ½øÖÆ³ÌÐò£º"%PHP_BINARY%
+echo "PHPï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½"%PHP_BINARY%
 %PHP_BINARY% -v
 echo.
-echo "Èç¹ûÄúÐèÒªÍ£Ö¹³ÌÐò£¬Çë°´ÏÂ×éºÏ¼ü£ºCTRL + C"
+echo "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÍ£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ë°´ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½CTRL + C"
 %PHP_BINARY% windows.php
 pause
 goto :end
 
 :end
-rem ½áÊø
+rem ï¿½ï¿½ï¿½ï¿½
 echo.

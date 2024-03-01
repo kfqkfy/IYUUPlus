@@ -116,6 +116,7 @@ class AutoReseed
         'reseedError' => 0,  // 错误：辅种失败（可以重试）
         'reseedRepeat' => 0,  // 重复：客户端已做种
         'reseedSkip' => 0,  // 跳过：因未设置passkey，而跳过
+        'reseedNotExsits' => 0,  // 跳过：因种子已被站点删除，而跳过
         'reseedPass' => 0,  // 忽略：因上次成功添加、存在缓存，而跳过
         'MoveSuccess' => 0,  // 移动成功
         'MoveError' => 0,  // 移动失败
@@ -439,8 +440,8 @@ class AutoReseed
             //static::wLog($hashArray, 'Request_' . $clientKey);
 
             self::$notifyMsg['hashCount'] += count($hashString);
-            // 分组200个hash，分批辅种
-            $group_num = 200;
+            // 分组400个hash，分批辅种
+            $group_num = 400;
             if (count($hashString) > $group_num) {
                 $hashJson = $hashArray['hash'];
                 $infoHash = json_decode($hashJson, true);
@@ -828,11 +829,11 @@ class AutoReseed
         if ($reseed_check && is_array($reseed_check)) {
             // 循环检查所有项目
             foreach ($reseed_check as $item) {
-                echo "clients_" . $k . "【" . self::$links[$k]['_config']['name'] . "】正在循环检查所有项目... {$siteName}" . PHP_EOL;
+                // echo "clients_" . $k . "【" . self::$links[$k]['_config']['name'] . "】正在循环检查所有项目... {$siteName}" . PHP_EOL;
                 $item = ($item === 'uid' ? 'id' : $item);   // 兼容性处理【用户的user_id在配置项内是id】
                 if (empty(self::$_sites[$siteName]) || empty(self::$_sites[$siteName][$item])) {
                     $msg = '-------因当前' . $siteName . "站点未设置" . $item . "，已跳过！！【如果确实已设置，请检查辅种任务，是否勾选{$siteName}站点】" . PHP_EOL . PHP_EOL;
-                    echo $msg;
+                    // echo $msg;
                     self::$notifyMsg['reseedSkip']++;
                     return false;
                 }
@@ -840,7 +841,7 @@ class AutoReseed
         }
         // 重复做种检测
         if (isset($infohash_Dir[$info_hash])) {
-            echo '-------与客户端现有种子重复：' . $_url . PHP_EOL . PHP_EOL;
+            // echo '-------与客户端现有种子重复：' . $_url . PHP_EOL . PHP_EOL;
             self::$notifyMsg['reseedRepeat']++;
             return false;
         }
@@ -858,6 +859,14 @@ class AutoReseed
             static::wLog('clients_' . $k . "【" . self::$links[$k]['_config']['name'] . "】" . PHP_EOL . $downloadDir . PHP_EOL . $_url . PHP_EOL . PHP_EOL, $siteName);
             return false;
         }
+
+        if (is_file(self::errNotifyCacheFile($sid, $torrent_id))) {
+            echo '-------种子不存在：' . $_url . PHP_EOL . PHP_EOL;
+            self::$notifyMsg['reseedNotExsits']++;
+            return false;
+        }
+
+
         // 流控检测
         if (isset(self::$_sites[$siteName]['limit'])) {
             echo "-------因当前" . $siteName . "站点触发流控，已跳过！！ {$_url}" . PHP_EOL . PHP_EOL;
@@ -1182,7 +1191,7 @@ class AutoReseed
                         return true;
                     } else {
                         $err = $result['result'] ?? '未知错误，请稍后重试！';
-                        if (strpos($err, 'http error 404: Not Found') !== false) {
+                        if (strpos($err, 'http error 404: Not Found') !== false || strpos($err, 'invalid or corrupt torrent file') !== false) {
                             static::sendNotify('404');
                         }
                         print "-----RPC添加种子任务，失败 [{$err}]" . PHP_EOL . PHP_EOL;
@@ -1294,6 +1303,7 @@ class AutoReseed
         $desp .= '**失败：' . self::$notifyMsg['reseedError'] . '**  [种子下载失败或网络超时引起]' . $br;
         $desp .= '**重复：' . self::$notifyMsg['reseedRepeat'] . '**  [客户端已做种]' . $br;
         $desp .= '**跳过：' . self::$notifyMsg['reseedSkip'] . '**  [未设置passkey]' . $br;
+        $desp .= '**跳过：' . self::$notifyMsg['reseedNotExsits'] . '**  [种子已被删除]' . $br;
         $desp .= '**忽略：' . self::$notifyMsg['reseedPass'] . '**  [成功添加存在缓存]' . $br;
         // 失败详情
         if (self::$notifyMsg['reseedError']) {
